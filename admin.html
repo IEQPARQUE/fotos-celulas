@@ -1,33 +1,43 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8">
-  <title>Admin</title>
+<meta charset="UTF-8">
+<title>Admin</title>
 </head>
 
 <body style="background:black; color:white; text-align:center;">
 
+<div id="login">
+  <h2>🔐 Login</h2>
+
+  <input type="text" id="user" placeholder="ⓘ Usuário"><br><br>
+  <input type="password" id="pass" placeholder="🔑 Senha"><br><br>
+
+  <button onclick="entrar()">Entrar</button>
+</div>
+
+<div id="painel" style="display:none;">
+  <h1>🔐 PAINEL ADMIN</h1>
+
+  <input type="text" id="link" placeholder="Link da imagem"><br><br>
+  <button onclick="add()">Adicionar</button>
+
+  <div id="lista"></div>
+</div>
+
 <script>
-const user = "admin";
-const pass = "1234";
+function entrar() {
+  const u = document.getElementById("user").value;
+  const p = document.getElementById("pass").value;
 
-let u = prompt("Usuário:");
-let p = prompt("Senha:");
-
-if (u !== user || p !== pass) {
-  document.body.innerHTML = "<h1>Acesso negado</h1>";
+  if (u === "admin" && p === "1234") {
+    document.getElementById("login").style.display = "none";
+    document.getElementById("painel").style.display = "block";
+  } else {
+    alert("Acesso negado");
+  }
 }
-</script>
 
-<h1>🔐 PAINEL ADMIN</h1>
-
-<input type="text" id="link" placeholder="Link da imagem"><br><br>
-
-<button onclick="add()">Adicionar</button>
-
-<div id="lista"></div>
-
-<script>
 function add() {
   let link = document.getElementById("link").value;
 
