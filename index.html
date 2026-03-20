@@ -9,8 +9,8 @@
 
 <h1>📸 FOTOS CÉLULAS</h1>
 
-<!-- IMAGEM DO MACACO -->
-<img src="macaco.png" style="width: 100%; opacity: 0.35;">
+<!-- IMAGEM DO GOOGLE DRIVE -->
+<img src="https://drive.google.com/uc?export=view&id=1RVVB2Tn0yYv339az7ofUMU7e-GhDRFAd" style="width: 100%; opacity: 0.35;">
 
 <br><br>
 
@@ -19,6 +19,8 @@
 <div id="galeria"></div>
 
 <script>
+const senha = "1234";
+
 const input = document.getElementById('upload');
 
 input.addEventListener('change', function() {
@@ -28,12 +30,37 @@ input.addEventListener('change', function() {
   const reader = new FileReader();
 
   reader.onload = function(e) {
+    const container = document.createElement('div');
+
     const img = document.createElement('img');
     img.src = e.target.result;
     img.style.width = "200px";
-    img.style.margin = "10px";
+    img.style.display = "block";
+    img.style.margin = "10px auto";
 
-    document.getElementById('galeria').appendChild(img);
+    const salvar = document.createElement('a');
+    salvar.href = e.target.result;
+    salvar.download = "foto.png";
+    salvar.innerText = "💾 Salvar";
+
+    const excluir = document.createElement('button');
+    excluir.innerText = "🗑️ Excluir";
+
+    excluir.onclick = function() {
+      const senhaDigitada = prompt("Digite a senha:");
+      if (senhaDigitada === senha) {
+        container.remove();
+      } else {
+        alert("Senha errada!");
+      }
+    };
+
+    container.appendChild(img);
+    container.appendChild(salvar);
+    container.appendChild(document.createElement("br"));
+    container.appendChild(excluir);
+
+    document.getElementById('galeria').appendChild(container);
   };
 
   reader.readAsDataURL(file);
