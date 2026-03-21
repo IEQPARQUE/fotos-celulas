@@ -19,7 +19,7 @@
 <div id="painel" style="display:none;">
   <h1>🔐 PAINEL ADMIN</h1>
 
-  <input type="text" id="link" placeholder="Link da imagem"><br><br>
+  <input type="file" id="file"><br><br>
   <button onclick="add()">Adicionar</button>
 
   <div id="lista"></div>
@@ -39,10 +39,17 @@ function entrar() {
 }
 
 function add() {
-  let link = document.getElementById("link").value;
+  let file = document.getElementById("file").files[0];
+
+  if (!file) {
+    alert("Escolhe uma imagem!");
+    return;
+  }
+
+  let url = URL.createObjectURL(file);
 
   let img = document.createElement("img");
-  img.src = link;
+  img.src = url;
   img.style.width = "200px";
 
   let btn = document.createElement("button");
